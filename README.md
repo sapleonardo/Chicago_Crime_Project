@@ -102,3 +102,33 @@ WHERE arrest = true
 | ----------- |
 | 1988502     |
 ###### Out of the total number of cases, almost two million out of over 7 million cases resulted in a conviction ######
+
+
+```sql
+SELECT COUNT(arrest) AS cases_dismissed 
+FROM bigquery-public-data.chicago_crime.crime
+WHERE arrest = false 
+```
+| cases\_dismissed |
+| ---------------- |
+| 5409131          |
+###### Out of the total number of cases, nearly five and a half million cases were dismissed ###### 
+
+```sql
+SELECT 
+SUM(CASE
+        WHEN arrest = true THEN 1
+        ELSE 0
+        END) AS total_convictions, 
+ COUNT(*) as totalamount_cases, 
+ SUM(CASE WHEN arrest = true THEN 1 ELSE 0 END) / COUNT(*) as conviction_percentage,  
+ SUM(CASE WHEN arrest = true THEN 1 ELSE 0 END) / COUNT(*) * 100 as final_convictionpercentage
+FROM bigquery-public-data.chicago_crime.crime  
+ORDER BY total_convictions DESC, totalamount_cases DESC 
+```
+| total\_convictions | totalamount\_cases | conviction\_percentage | final\_convictionpercentage |
+| ------------------ | ------------------ | ---------------------- | --------------------------- |
+| 1988502            | 7397633            | 0.268802466951253      | 26.8802466951253            |
+###### Only 27 percent of the total cases catalogued resulted in a conviction ######
+
+
