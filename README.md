@@ -12,3 +12,53 @@
 
 ###### 3: Which of Chicagos wards is the most violent? ###### 
 
+
+## The following is an introduction to the dataset along with the columns of importance ## 
+
+```sql 
+SELECT case_number AS cases 
+FROM bigquery-public-data.chicago_crime.crime LIMIT 5;
+```
+| cases    |
+| -------- |
+| HY440240 |
+| HY470758 |
+| HY473735 |
+| HY509904 |
+| HY323457 |
+
+
+###### The column "cases" shows the unique case_number pertaining to each incident documented by the chicago police department ######
+
+
+
+```sql
+SELECT arrest AS conviction_or_no 
+FROM bigquery-public-data.chicago_crime.crime
+LIMIT 5; 
+```
+| conviction\_or\_no |
+| ------------------ |
+| true               |
+| false              |
+| true               |
+| true               |
+| false              |
+
+###### The column "conviction/_or/_no" returns a value of "true" if the case in question resulted in a conviction and "false" if there was no conviction #######
+
+
+```sql 
+
+SELECT domestic as domestic_cases 
+FROM bigquery-public-data.chicago_crime.crime LIMIT 5; 
+```
+| domestic\_cases |
+| --------------- |
+| false           |
+| true            |
+| false           |
+| false           |
+| false           |
+###### The column "domestic\_cases" returns a value of "true" if the case was domestic and a value of "fasle" if the case wasn't domestic ######
+
