@@ -80,3 +80,12 @@ SELECT ward FROM bigquery-public-data.chicago_crime.crime LIMIT 10;
 | 25   |
 ###### The column "ward" returns the ward where each case was reported ######
 
+
+```sql 
+SELECT COUNT(DISTINCT case_number) AS cases_recorded 
+FROM bigquery-public-data.chicago_crime.crime; 
+``` 
+| cases\_recorded |
+| --------------- |
+| 7397149         |
+###### The column "cases_recorded" returns the value of the total number of cases in this dataset which were catalogued by the chicago police department ######
