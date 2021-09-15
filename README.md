@@ -89,3 +89,16 @@ FROM bigquery-public-data.chicago_crime.crime;
 | --------------- |
 | 7397149         |
 ###### The column "cases_recorded" returns the value of the total number of cases in this dataset which were catalogued by the chicago police department ######
+
+
+## Chicago Crime Analysis Part One: What were the total number of cases? What percentage resulted in a conviction? ## 
+
+```sql 
+SELECT COUNT(arrest) AS convictions 
+FROM bigquery-public-data.chicago_crime.crime
+WHERE arrest = true
+```
+| convictions |
+| ----------- |
+| 1988502     |
+###### Out of the total number of cases, almost two million out of over 7 million cases resulted in a conviction ######
