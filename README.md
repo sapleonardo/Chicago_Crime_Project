@@ -62,3 +62,21 @@ FROM bigquery-public-data.chicago_crime.crime LIMIT 5;
 | false           |
 ###### The column "domestic\_cases" returns a value of "true" if the case was domestic and a value of "fasle" if the case wasn't domestic ######
 
+
+```sql
+SELECT ward FROM bigquery-public-data.chicago_crime.crime LIMIT 10; 
+```
+| ward |
+| ---- |
+| 9    |
+| 11   |
+| 10   |
+| 9    |
+| 23   |
+| 45   |
+| 9    |
+| 45   |
+| 5    |
+| 25   |
+###### The column "ward" returns the ward where each case was reported ######
+
