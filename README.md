@@ -132,3 +132,15 @@ ORDER BY total_convictions DESC, totalamount_cases DESC
 ###### Only 27 percent of the total cases catalogued resulted in a conviction ######
 
 
+## Chicago Crime Analysis Part Two: Are domestic cases more likely to result in a conviction or not? ## 
+
+```sql
+SELECT COUNT(domestic) AS total_domestic_cases 
+FROM bigquery-public-data.chicago_crime.crime
+WHERE domestic = true;
+```
+| total\_domestic\_cases |
+| ---------------------- |
+| 1006454                |
+###### Out of all the catalogued cases, a little over a million of them were domestic cases ######
+
