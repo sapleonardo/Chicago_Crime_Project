@@ -90,6 +90,16 @@ FROM bigquery-public-data.chicago_crime.crime;
 | 7397149         |
 ###### The column "cases_recorded" returns the value of the total number of cases in this dataset which were catalogued by the chicago police department ######
 
+```sql
+SELECT MAX(date) as recent_date, MIN(date) as oldest_date 
+FROM bigquery-public-data.chicago_crime.crime; 
+```
+| recent\_date            | oldest\_date            |
+| ----------------------- | ----------------------- |
+| 2021-09-07 23:50:00 UTC | 2001-01-01 00:00:00 UTC |
+###### This data was collected across twenty years beginning in 2001 all the way to summer 2021 ######
+
+
 
 ## Chicago Crime Analysis Part One: What were the total number of cases? What percentage resulted in a conviction? ## 
 
@@ -143,4 +153,25 @@ WHERE domestic = true;
 | ---------------------- |
 | 1006454                |
 ###### Out of all the catalogued cases, a little over a million of them were domestic cases ######
+###### Do these represent a high percentage of convictions? ######
+
+```sql
+SELECT 
+SUM(CASE 
+    WHEN arrest = true AND domestic = true THEN 1
+    ELSE 0 
+    END) AS total_domesticarrests, 
+COUNT(*) AS all_cases, 
+SUM(CASE WHEN arrest = true AND domestic = true THEN 1 ELSE 0 END) / COUNT(*) AS domestic_convictionpercentage, 
+SUM(CASE WHEN arrest = true AND domestic = true THEN 1 ELSE 0 END) / COUNT(*) * 100 AS final_domesticconviction
+FROM bigquery-public-data.chicago_crime.crime 
+ORDER BY total_domesticarrests DESC, all_cases DESC;  
+```
+| total\_domesticarrests | all\_cases | domestic\_convictionpercentage | final\_domesticconviction |
+| ---------------------- | ---------- | ------------------------------ | ------------------------- |
+| 193046                 | 7398258    | 0.02609343983408               | 2.60934398340799          |
+###### Out of over 7 million documented cases, only 193046 of domestic cases resulted in a successful conviction ######
+###### This means that only %2.6 of domestic cases resulted in a successful conviction ######
+###### In conclusion, these findings reveal that domestic cases are not more likely to result in a conviction ###### 
+
 
