@@ -175,3 +175,35 @@ ORDER BY total_domesticarrests DESC, all_cases DESC;
 ###### In conclusion, these findings reveal that domestic cases are not more likely to result in a conviction ###### 
 
 
+## Chicago Crime Analysis Part Three: Which ward is the most violent? ##
+
+```sql 
+SELECT COUNT(DISTINCT ward) as distinct_wards 
+FROM bigquery-public-data.chicago_crime.crime; 
+``` 
+| distinct\_wards |
+| --------------- |
+| 50              |
+###### All of the data gathered from 2001 too 2021 focused upon 50 DISTINCT wards #######
+
+```sql 
+SELECT DISTINCT ward, COUNT(case_number) as totalcrimes_comitted
+FROM bigquery-public-data.chicago_crime.crime 
+WHERE ward IS NOT NULL  
+GROUP BY ward
+ORDER BY totalcrimes_comitted DESC 
+LIMIT 10;
+```
+| ward | totalcrimes\_comitted |
+| ---- | --------------------- |
+| 28   | 312186                |
+| 42   | 278639                |
+| 24   | 268157                |
+| 27   | 251781                |
+| 2    | 248784                |
+| 17   | 226197                |
+| 20   | 223318                |
+| 6    | 223122                |
+| 3    | 206654                |
+| 21   | 205491                |
+###### Across twenty years of data gathered, the ward which is the most violent is Chicagos ward 28 with a total of 312,186 crimes committed ######
